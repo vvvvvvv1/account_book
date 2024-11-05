@@ -9,37 +9,71 @@ class AccountbookAdd extends StatefulWidget {
 
 class _AccountbookAddState extends State<AccountbookAdd> {
   final TextEditingController _dateTimeController = TextEditingController();
+  DateTime selectDateTime = DateTime.now(); // 사용자가 선택한 날짜와 시간을 저장
+
+  @override
+  void initState() {
+    super.initState();
+
+    // 초기 상태에 현재 날짜와 시간을 지정
+    _dateTimeController.text = formatDateTimeWithDayAndMeridiem(selectDateTime);
+  }
+
+  // 날짜와 시간을 "YYYY-MM-DD (요일) 오전/오후 HH:mm" 형식으로 포맷하는 함수
+  String formatDateTimeWithDayAndMeridiem(DateTime dateTime) {
+    const List<String> koreanWeekdays = ['월', '화', '수', '목', '금', '토', '일'];
+
+    // 요일 설정
+    String dayOfWeek = koreanWeekdays[dateTime.weekday - 1];
+
+    // 오전/오후 구분 및 12시간 포맷 설정
+    String meridiem = dateTime.hour < 12 ? '오전' : '오후';
+    int hour = dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12;
+
+    // 날짜와 요일, 시간 문자열 포맷
+    return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')} ($dayOfWeek) '
+        '$meridiem $hour:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
 
   Future<void> _selectDateTime(BuildContext context) async {
-    // 날짜 선택
+    // 날짜 선택기 호출
     final DateTime? date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+
+      /// 팝업이 열릴 때 기본적으로 보여줄 날짜
+      initialDate: selectDateTime,
+
+      /// 사용자가 선택할 수 있는 날짜의 시작 범위
+      firstDate: DateTime(1990),
+
+      /// 사용자가 선택할 수 있는 날짜의 끝 범위
       lastDate: DateTime(2100),
     );
-    if (date == null) return; // 선택 취소 시
+    if (date == null) return;
 
-    // 시간 선택
+    // 시간 선택기 호출
     final TimeOfDay? time = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (time == null) return; // 선택 취소 시
 
-    // 선택된 날짜와 시간을 결합하여 TextField에 표시
-    final DateTime selectedDateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
+      /// 팝업이 열릴 때 기본적으로 보여줄 시간
+      initialTime:
+          TimeOfDay(hour: selectDateTime.hour, minute: selectDateTime.minute),
     );
+    if (time == null) return;
 
+    /// 선택된 날짜와 시간을 결합하여 표시
     setState(() {
+      selectDateTime = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+
+      /// 새로운 날짜 및 시간 포맷된 문자열로 변환 후 적용
       _dateTimeController.text =
-          '${selectedDateTime.year}-${selectedDateTime.month.toString().padLeft(2, '0')}-${selectedDateTime.day.toString().padLeft(2, '0')} '
-          '${selectedDateTime.hour.toString().padLeft(2, '0')}:${selectedDateTime.minute.toString().padLeft(2, '0')}';
+          formatDateTimeWithDayAndMeridiem(selectDateTime);
     });
   }
 
@@ -138,40 +172,156 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                 ],
               ),
               const SizedBox(height: 20),
-              // 날짜와 시간을 선택하는 TextField 추가
+              Container(
+                child: Row(
+                  children: [
+                    const SizedBox(width: 18),
+                    const Text('날짜'),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 17),
+                        child: TextField(
+                          controller: _dateTimeController,
 
-              const SizedBox(height: 20),
-              Row(
+                          /// 읽기 전용 (사용자 직접 입력 불가)
+                          readOnly: true,
+
+                          /// 날짜 및 시간 선택기 실행
+                          onTap: () => _selectDateTime(context),
+                          decoration: const InputDecoration(
+                            // hintText: '날짜와 시간을 선택하세요',
+
+                            // TextField가 선택되지 않았을 때 나타나는 밑줄 스타일
+                            // UnderlineInputBorder로 설정하여 밑줄만 표시
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey), // 기본 밑줄 색상
+                            ),
+
+                            /// TextField가 선택되었을 때 나타나는 밑줄 스타일
+                            /// UnderlineInputBorder를 사용해 밑줄을 표시
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.blue), // 포커스 시 밑줄 색상
+                            ),
+                            //suffixIcon: Icon(Icons.calendar_today),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Row(
                 children: [
-                  const SizedBox(width: 18),
-                  const Text('테스트'),
-                  const SizedBox(
-                    width: 10,
+                  SizedBox(width: 17),
+                  Text(
+                    '내용',
                   ),
                   Expanded(
-                    child: TextField(
-                      controller: _dateTimeController,
-                      readOnly: true,
-                      onTap: () => _selectDateTime(context), // 날짜 및 시간 선택기 실행
-                      decoration: const InputDecoration(
-                        hintText: '날짜와 시간을 선택하세요',
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey), // 기본 밑줄 색상
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue), // 포커스 시 밑줄 색상
-                        ),
-                        suffixIcon: Icon(Icons.calendar_today),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Row(
+                children: [
+                  SizedBox(width: 17),
+                  Text(
+                    '내용',
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey))),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Row(
+                children: [
+                  SizedBox(width: 17),
+                  Text(
+                    '내용',
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey))),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Row(
+                children: [
+                  SizedBox(width: 17),
+                  Text(
+                    '내용',
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey))),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
                 ],
               ),
+              const SizedBox(
+                height: 30,
+              ),
+
+              /// 빈 바
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 10,
+                      height: 10,
+                      color: Colors.grey.shade200,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

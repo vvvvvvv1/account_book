@@ -67,6 +67,7 @@ class FirstPage extends StatelessWidget {
       home: DefaultTabController(
         length: 5,
         child: Scaffold(
+          /// AppBar
           appBar: AppBar(
             backgroundColor: Colors.white,
             title: const Text(
@@ -99,6 +100,8 @@ class FirstPage extends StatelessWidget {
                 icon: const Icon(Icons.list),
               ),
             ],
+
+            /// TabBar
             bottom: const TabBar(
                 isScrollable: false,
                 indicatorColor: Colors.red,
@@ -133,6 +136,7 @@ class FirstPage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
+              /// 첫번째 탭
               Column(
                 children: [
                   Container(
@@ -174,24 +178,32 @@ class FirstPage extends StatelessWidget {
                       color: Colors.grey.shade200,
                       child: const Center(
                         child: Text(
-                          "테스트",
+                          "일일",
                         ),
                       ),
                     ),
                   )
                 ],
               ),
+
+              /// 두번째 탭
               const Center(
-                child: Text("테스트"),
+                child: Text("달력"),
               ),
+
+              /// 세번째 탭
               const Center(
-                child: Text("테스트"),
+                child: Text("월별"),
               ),
+
+              /// 네번째 탭
               const Center(
-                child: Text("테스트"),
+                child: Text("결산"),
               ),
+
+              /// 다섯번째 탭
               const Center(
-                child: Text("테스트"),
+                child: Text("메모"),
               ),
             ],
           ),
