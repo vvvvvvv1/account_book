@@ -139,7 +139,12 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                     onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor:
-                          WidgetStateProperty.all(Colors.grey.shade200),
+                          WidgetStateProperty.resolveWith<Color>((states) {
+                        if (states.contains(WidgetState.pressed)) {
+                          return Colors.orange.shade900;
+                        }
+                        return Colors.grey.shade200;
+                      }),
                       padding: WidgetStateProperty.all(
                         const EdgeInsets.symmetric(
                             horizontal: 55, vertical: 16),
@@ -223,7 +228,7 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                 children: [
                   SizedBox(width: 17),
                   Text(
-                    '내용',
+                    '금액',
                   ),
                   Expanded(
                     child: Padding(
@@ -247,7 +252,7 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                 children: [
                   SizedBox(width: 17),
                   Text(
-                    '내용',
+                    '분류',
                   ),
                   Expanded(
                     child: Padding(
@@ -269,7 +274,7 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                 children: [
                   SizedBox(width: 17),
                   Text(
-                    '내용',
+                    '자산',
                   ),
                   Expanded(
                     child: Padding(
@@ -321,7 +326,90 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                     ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              /// 메모
+              const Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: '메모',
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          suffixIcon: Icon(
+                            Icons.camera_alt_outlined,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+
+              // 저장
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SizedBox(
+                      width: 300,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          foregroundColor:
+                              WidgetStateProperty.all(Colors.white),
+                          backgroundColor:
+                              WidgetStateProperty.all(Colors.orange.shade900),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          '저장하기',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: SizedBox(
+                      width: 100,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          foregroundColor:
+                              WidgetStateProperty.all(Colors.black),
+                          backgroundColor:
+                              WidgetStateProperty.all(Colors.white),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          '계속',
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
