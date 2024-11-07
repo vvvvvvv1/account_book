@@ -11,12 +11,38 @@ class _AccountbookAddState extends State<AccountbookAdd> {
   final TextEditingController _dateTimeController = TextEditingController();
   DateTime selectDateTime = DateTime.now(); // 사용자가 선택한 날짜와 시간을 저장
 
+  final List<bool> _isSelected = [false, false, false];
+
+  String title = "";
+
+  // 선택 버튼 찾기
+  void _selectButton(int index) {
+    setState(() {
+      for (var i = 0; i < _isSelected.length; i++) {
+        // **참(true)**일 때는 현재 인덱스(i)가 클릭된 버튼의 인덱스(index)와 같음
+        // **거짓(false)**일 때는 클릭된 버튼이 아니므로 _isSelected[i]를 false로 설정하여 선택되지 않은 상태
+        _isSelected[i] = i == index;
+      }
+
+      // 선택된 버튼에 따라 AppBar 타이틀 변경
+      if (_isSelected[0]) {
+        title = "수입";
+      } else if (_isSelected[1]) {
+        title = "지출";
+      } else if (_isSelected[2]) {
+        title = "이체";
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
     // 초기 상태에 현재 날짜와 시간을 지정
     _dateTimeController.text = formatDateTimeWithDayAndMeridiem(selectDateTime);
+
+    _selectButton(1);
   }
 
   // 날짜와 시간을 "YYYY-MM-DD (요일) 오전/오후 HH:mm" 형식으로 포맷하는 함수
@@ -84,8 +110,8 @@ class _AccountbookAddState extends State<AccountbookAdd> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: const Text(
-            '지출',
+          title: Text(
+            title,
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -118,11 +144,16 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // 파랑 파랑 파랑
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => _selectButton(0),
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.grey.shade200),
+                      foregroundColor: _isSelected[0]
+                          ? WidgetStateProperty.all(Colors.blue.shade300)
+                          : WidgetStateProperty.all(Colors.grey.shade600),
+                      backgroundColor: _isSelected[0]
+                          ? WidgetStateProperty.all(Colors.white)
+                          : WidgetStateProperty.all(Colors.grey.shade200),
                       padding: WidgetStateProperty.all(
                         const EdgeInsets.symmetric(
                             horizontal: 55, vertical: 16),
@@ -130,21 +161,31 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: _isSelected[0]
+                                ? Colors.blue.shade300
+                                : Colors.grey,
+                          ),
+                        ),
+                      ),
+                      textStyle: WidgetStateProperty.all(
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     child: const Text("수입"),
                   ),
+                  // 주황 주황 주황
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => _selectButton(1),
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.resolveWith<Color>((states) {
-                        if (states.contains(WidgetState.pressed)) {
-                          return Colors.orange.shade900;
-                        }
-                        return Colors.grey.shade200;
-                      }),
+                      foregroundColor: _isSelected[1]
+                          ? WidgetStateProperty.all(Colors.orange.shade900)
+                          : WidgetStateProperty.all(Colors.grey.shade600),
+                      backgroundColor: _isSelected[1]
+                          ? WidgetStateProperty.all(Colors.white)
+                          : WidgetStateProperty.all(Colors.grey.shade200),
                       padding: WidgetStateProperty.all(
                         const EdgeInsets.symmetric(
                             horizontal: 55, vertical: 16),
@@ -152,16 +193,31 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: _isSelected[1]
+                                ? Colors.orange.shade900
+                                : Colors.grey,
+                          ),
+                        ),
+                      ),
+                      textStyle: WidgetStateProperty.all(
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     child: const Text("지출"),
                   ),
+                  // 검정 겅정 검정
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => _selectButton(2),
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.grey.shade200),
+                      foregroundColor: _isSelected[2]
+                          ? WidgetStateProperty.all(Colors.black)
+                          : WidgetStateProperty.all(Colors.grey.shade600),
+                      backgroundColor: _isSelected[2]
+                          ? WidgetStateProperty.all(Colors.white)
+                          : WidgetStateProperty.all(Colors.grey.shade200),
                       padding: WidgetStateProperty.all(
                         const EdgeInsets.symmetric(
                             horizontal: 55, vertical: 16),
@@ -169,6 +225,14 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: _isSelected[2] ? Colors.black : Colors.grey,
+                          ),
+                        ),
+                      ),
+                      textStyle: WidgetStateProperty.all(
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

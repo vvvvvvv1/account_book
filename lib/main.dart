@@ -187,18 +187,153 @@ class FirstPage extends StatelessWidget {
               ),
 
               /// 두번째 탭
-              const Center(
-                child: Text("달력"),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: const Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("수입"),
+                            Text("지출"),
+                            Text("합계"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            Text("0"),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.grey.shade200,
+                      child: const Center(
+                        child: Text(
+                          "달력",
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
 
               /// 세번째 탭
-              const Center(
-                child: Text("월별"),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: const Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("수입"),
+                            Text("지출"),
+                            Text("합계"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            Text("0"),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.grey.shade200,
+                      child: const Center(
+                        child: Text(
+                          "월별",
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
 
               /// 네번째 탭
-              const Center(
-                child: Text("결산"),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: const Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("수입"),
+                            Text("지출"),
+                            Text("합계"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            Text("0"),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.grey.shade200,
+                      child: const Center(
+                        child: Text(
+                          "결산",
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
 
               /// 다섯번째 탭
