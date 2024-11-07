@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,8 +58,37 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  DateTime MainSelectDateTime = DateTime.now();
+
+  void _updateYearMonth(int monthChange) {
+    setState(() {
+      MainSelectDateTime = DateTime(
+          MainSelectDateTime.year, MainSelectDateTime.month + monthChange);
+    });
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: MainSelectDateTime,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (picked != null && picked != MainSelectDateTime) {
+      setState(() {
+        MainSelectDateTime = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +100,20 @@ class FirstPage extends StatelessWidget {
           /// AppBar
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: const Text(
-              "2020년 3월",
+            title: Row(
+              children: [
+                IconButton(
+                  onPressed: () => _updateYearMonth(-1),
+                  icon: const Icon(Icons.arrow_back),
+                ),
+                Text(
+                  '${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월',
+                ),
+                IconButton(
+                  onPressed: () => _updateYearMonth(1),
+                  icon: const Icon(Icons.arrow_forward),
+                ),
+              ],
             ),
             actions: [
               IconButton(

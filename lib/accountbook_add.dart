@@ -61,6 +61,7 @@ class _AccountbookAddState extends State<AccountbookAdd> {
         '$meridiem $hour:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 
+  // 수입, 지출, 이체 등록 페이지 (날짜 항목)
   Future<void> _selectDateTime(BuildContext context) async {
     // 날짜 선택기 호출
     final DateTime? date = await showDatePicker(
