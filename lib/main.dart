@@ -1,5 +1,6 @@
 import 'package:account_book/accountbook_add.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,6 +69,7 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   DateTime MainSelectDateTime = DateTime.now();
 
+  /// 연도와 월 업데이트 (화살표 아이콘 클릭)
   void _updateYearMonth(int monthChange) {
     setState(() {
       MainSelectDateTime = DateTime(
@@ -75,17 +77,36 @@ class _FirstPageState extends State<FirstPage> {
     });
   }
 
-  Future<void> _selectDate(BuildContext context) async {
+  //#region _selectDate 메서드
+  // Future<void> _selectDate(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: MainSelectDateTime,
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime(2100),
+  //   );
+
+  //   if (picked != null && picked != MainSelectDateTime) {
+  //     setState(() {
+  //       MainSelectDateTime = picked;
+  //     });
+  //   }
+  // }
+  //#endregion
+
+  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장
+  Future<void> _selectYearMonth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: MainSelectDateTime,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      initialDate: MainSelectDateTime, // 다이얼로그 열릴 때 기본 선택된 날짜
+      firstDate: DateTime(2000), // 사용자가 선택할 수 있는 가장 이른 날짜
+      lastDate: DateTime(2100), // 사용자가 선택할 수 있는 가장 마지막 날짜
+      initialDatePickerMode: DatePickerMode.year, // 다이얼로그가 열릴 때 연도 선택 모드로 시작
+      helpText: "년월 선택", // 다이얼로그 상단에 표시되는 텍스트
     );
-
-    if (picked != null && picked != MainSelectDateTime) {
+    if (picked != null) {
       setState(() {
-        MainSelectDateTime = picked;
+        MainSelectDateTime = DateTime(picked.year, picked.month); // 선택한 년, 월 저장
       });
     }
   }
@@ -94,6 +115,15 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      locale: const Locale('ko', 'KR'), // 한국어 로케일 설정
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate, // 한국어 등 로케일을 지원
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'), // 한국어 지원
+        Locale('en', 'US'), // 영어 지원 (옵션)
+      ],
       home: DefaultTabController(
         length: 5,
         child: Scaffold(
@@ -106,8 +136,13 @@ class _FirstPageState extends State<FirstPage> {
                   onPressed: () => _updateYearMonth(-1),
                   icon: const Icon(Icons.arrow_back),
                 ),
-                Text(
-                  '${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월',
+                GestureDetector(
+                  onTap: () =>
+                      _selectYearMonth(context), // 텍스트 클릭 시 DatePicker 열기
+                  child: Text(
+                    "${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월",
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
                 IconButton(
                   onPressed: () => _updateYearMonth(1),
