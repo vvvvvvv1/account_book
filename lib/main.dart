@@ -1,6 +1,7 @@
 import 'package:account_book/accountbook_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: IndexedStack(
+          /// 보여주려는 페이지 index
           index: currentIndex,
+
+          /// 보여줄 수 있는 모든 페이지 위젯 리스트
           children: const [
             FirstPage(),
             SecondPage(),
@@ -40,8 +44,8 @@ class _MyAppState extends State<MyApp> {
           },
           selectedItemColor: Colors.red, // 선택된 아이콘 색상
           unselectedItemColor: Colors.grey, // 선택되지 않은 아이콘 색상
-          //showSelectedLabels: false, // 선택된 항목 label 숨기기
-          //showUnselectedLabels: false, // 선택되지 않은 항목 label 숨기기
+          //showSelectedLabels: false,          // 선택된 항목 label 숨기기
+          //showUnselectedLabels: false,        // 선택되지 않은 항목 label 숨기기
           type: BottomNavigationBarType.fixed, // 선택시 아이콘 움직이지 않기
           backgroundColor: Colors.white,
           items: const [
@@ -302,10 +306,33 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.grey.shade200,
-                      child: const Center(
-                        child: Text(
-                          "달력",
+                      color: Colors.white,
+                      child: TableCalendar(
+                        daysOfWeekHeight: 20,
+                        daysOfWeekStyle: DaysOfWeekStyle(
+                          
+                        ),
+                        locale: 'ko_KR',
+                        headerVisible: false,
+                        focusedDay: MainSelectDateTime,
+                        firstDay: DateTime.utc(1900, 1, 1),
+                        lastDay: DateTime.utc(2100, 1, 1),
+                        calendarStyle: const CalendarStyle(
+                          cellMargin: EdgeInsets.all(8),
+                          defaultTextStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                          todayTextStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                          tableBorder: TableBorder(
+                            horizontalInside: BorderSide(
+                              color: Colors.grey,
+                            ),
+                            verticalInside: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
                         ),
                       ),
                     ),
