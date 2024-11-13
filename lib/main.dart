@@ -72,12 +72,24 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   DateTime MainSelectDateTime = DateTime.now();
+  DateTime MainSelectFirstDay =
+      DateTime(DateTime.now().year, DateTime.now().month, 1);
+  DateTime MainSelelctLastDay =
+      DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
   /// 연도와 월 업데이트 (화살표 아이콘 클릭)
   void _updateYearMonth(int monthChange) {
     setState(() {
       MainSelectDateTime = DateTime(
           MainSelectDateTime.year, MainSelectDateTime.month + monthChange);
+
+      // 해당 달의 1일 표출
+      MainSelectFirstDay = DateTime(
+          MainSelectFirstDay.year, MainSelectFirstDay.month + monthChange, 1);
+
+      // 해당 달의 마지막일 표출
+      MainSelelctLastDay = DateTime(MainSelelctLastDay.year,
+          MainSelelctLastDay.month + monthChange + 1, 0);
     });
   }
 
@@ -222,9 +234,9 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Container(
                     color: Colors.white,
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Row(
+                        const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -233,7 +245,7 @@ class _FirstPageState extends State<FirstPage> {
                             Text("합계"),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
@@ -250,7 +262,17 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text("0"),
                           ],
-                        )
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 1,
+                                color: Colors.grey.shade300,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -272,9 +294,9 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Container(
                     color: Colors.white,
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Row(
+                        const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -283,7 +305,7 @@ class _FirstPageState extends State<FirstPage> {
                             Text("합계"),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
@@ -300,7 +322,17 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text("0"),
                           ],
-                        )
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 1,
+                                color: Colors.grey.shade300,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -309,9 +341,7 @@ class _FirstPageState extends State<FirstPage> {
                       color: Colors.white,
                       child: TableCalendar(
                         daysOfWeekHeight: 20,
-                        daysOfWeekStyle: DaysOfWeekStyle(
-                          
-                        ),
+                        daysOfWeekStyle: const DaysOfWeekStyle(),
                         locale: 'ko_KR',
                         headerVisible: false,
                         focusedDay: MainSelectDateTime,
@@ -345,9 +375,9 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Container(
                     color: Colors.white,
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Row(
+                        const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -356,7 +386,7 @@ class _FirstPageState extends State<FirstPage> {
                             Text("합계"),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
@@ -373,7 +403,17 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text("0"),
                           ],
-                        )
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 1,
+                                color: Colors.grey.shade300,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -395,9 +435,9 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Container(
                     color: Colors.white,
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Row(
+                        const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -406,7 +446,7 @@ class _FirstPageState extends State<FirstPage> {
                             Text("합계"),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
@@ -423,17 +463,122 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text("0"),
                           ],
-                        )
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 1,
+                                color: Colors.grey.shade300,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.grey.shade200,
-                      child: const Center(
-                        child: Text(
-                          "결산",
-                        ),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 30,
+                                ),
+                              ),
+                              const Icon(Icons.add_card_outlined),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                '예산',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Spacer(),
+                              TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.all(
+                                    Colors.grey.shade200,
+                                  ),
+                                  shape: WidgetStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: const Row(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      '예산설정',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_right_outlined,
+                                      size: 15,
+                                      color: Colors.grey,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  width: 10,
+                                  height: 10,
+                                  color: Colors.grey.shade200,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 30,
+                                ),
+                              ),
+                              const Icon(Icons.attach_money_outlined),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                '자산',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                '${MainSelectDateTime.year.toString().substring(2)}.${MainSelectDateTime.month}.${MainSelectFirstDay.day} ~ ${MainSelectDateTime.year.toString().substring(2)}.${MainSelectDateTime.month}.${MainSelelctLastDay.day}',
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
                   )
