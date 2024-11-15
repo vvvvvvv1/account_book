@@ -486,7 +486,7 @@ class _FirstPageState extends State<FirstPage> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 15,
+                                  horizontal: 13,
                                   vertical: 30,
                                 ),
                               ),
@@ -554,7 +554,7 @@ class _FirstPageState extends State<FirstPage> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 15,
+                                  horizontal: 10,
                                   vertical: 30,
                                 ),
                               ),
@@ -577,11 +577,114 @@ class _FirstPageState extends State<FirstPage> {
                                 width: 20,
                               ),
                             ],
-                          )
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            height: 150,
+                            margin: const EdgeInsets.symmetric(horizontal: 23),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 15),
+                            child: const Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '전월대비 지출 (당월/전월)',
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0%',
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '지출 (현금,은행)',
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0원',
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '지출 (카드)',
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0원',
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '이체 (현금,은행->)',
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0원',
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12),
+                              ),
+                              SizedBox(
+                                width: 450,
+                                height: 40,
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    shape: WidgetStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        side: const BorderSide(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    '메일로 엑셀파일 내보내기',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
 
