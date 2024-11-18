@@ -1,6 +1,7 @@
 import 'package:account_book/accountbook_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 void main() {
@@ -419,11 +420,22 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.grey.shade200,
-                      child: const Center(
-                        child: Text(
-                          "월별",
-                        ),
+                      color: Colors.white,
+                      child: ListView(
+                        children: [
+                          ExpansionTile(
+                            showTrailingIcon: false,
+                            title: const Text('12월'),
+                            children: [
+                              Container(
+                                color: Colors.grey,
+                                child: const ListTile(
+                                  title: Text('12 ~ 12'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   )
@@ -651,7 +663,7 @@ class _FirstPageState extends State<FirstPage> {
                             height: 20,
                           ),
                           Row(
-                            children: [
+                            children: <Widget>[
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 12),
                               ),
@@ -659,25 +671,40 @@ class _FirstPageState extends State<FirstPage> {
                                 width: 450,
                                 height: 40,
                                 child: TextButton(
-                                  style: ButtonStyle(
-                                    shape: WidgetStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: const BorderSide(
-                                          color: Colors.grey,
+                                    style: ButtonStyle(
+                                      shape: WidgetStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          side: const BorderSide(
+                                            color: Colors.grey,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  onPressed: () {},
-                                  child: const Text(
-                                    '메일로 엑셀파일 내보내기',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
+                                    onPressed: () {
+                                      print('Click');
+                                    },
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.fileExcel,
+                                          color: Colors.lightGreen,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          '메일로 엑셀파일 내보내기',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                               ),
                             ],
                           ),
