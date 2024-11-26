@@ -1,3 +1,4 @@
+import 'package:account_book/Class/Transaction.dart';
 import 'package:account_book/accountbook_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,12 +72,47 @@ class FirstPage extends StatefulWidget {
   State<FirstPage> createState() => _FirstPageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstPageState extends State<FirstPage>
+    with SingleTickerProviderStateMixin {
   DateTime MainSelectDateTime = DateTime.now();
+
+  /// 해당 년월 첫날 표출
   DateTime MainSelectFirstDay =
       DateTime(DateTime.now().year, DateTime.now().month, 1);
+
+  /// 해당 년월 마지막날 표출
   DateTime MainSelelctLastDay =
       DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
+
+  /// 해당년도 표출
+  DateTime MainSelectYear = DateTime.now();
+
+  late TabController _tabController;
+
+  List<Transaction> transactions = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// 특정 Tab 클릭 시 다른 AppBar 표출
+    _tabController = TabController(length: 5, vsync: this);
+
+    _tabController.addListener(() {
+      setState(() {});
+    });
+
+    transactions.add(Transaction(
+      date: "01", // 날짜
+      dayOfWeek: "일요일", // 요일
+      category: "교통/차량", // 카테고리
+      description: "테스트", // 설명
+      time: "오후 3:16", // 시간
+      bank: "신한은행", // 장소/은행
+      income: 0, // 수입
+      expense: 0, // 지출)
+    ));
+  }
 
   /// 연도와 월 업데이트 (화살표 아이콘 클릭)
   void _updateYearMonth(int monthChange) {
@@ -91,6 +127,13 @@ class _FirstPageState extends State<FirstPage> {
       // 해당 달의 마지막일 표출
       MainSelelctLastDay = DateTime(MainSelelctLastDay.year,
           MainSelelctLastDay.month + monthChange + 1, 0);
+    });
+  }
+
+  /// 연도와 월 업데이트 (화살표 아이콘 클릭)
+  void _updateYear(int yearChange) {
+    setState(() {
+      MainSelectYear = DateTime(MainSelectYear.year + yearChange);
     });
   }
 
@@ -111,7 +154,7 @@ class _FirstPageState extends State<FirstPage> {
   // }
   //#endregion
 
-  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장
+  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장 (년월 선택)
   Future<void> _selectYearMonth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -124,6 +167,23 @@ class _FirstPageState extends State<FirstPage> {
     if (picked != null) {
       setState(() {
         MainSelectDateTime = DateTime(picked.year, picked.month); // 선택한 년, 월 저장
+      });
+    }
+  }
+
+  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장 (년월 선택)
+  Future<void> _selectYear(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: MainSelectYear, // 다이얼로그 열릴 때 기본 선택된 날짜
+      firstDate: DateTime(2000), // 사용자가 선택할 수 있는 가장 이른 날짜
+      lastDate: DateTime(2100), // 사용자가 선택할 수 있는 가장 마지막 날짜
+      initialDatePickerMode: DatePickerMode.year, // 다이얼로그가 열릴 때 연도 선택 모드로 시작
+      helpText: "년도 선택", // 다이얼로그 상단에 표시되는 텍스트
+    );
+    if (picked != null) {
+      setState(() {
+        MainSelectYear = DateTime(picked.year); // 선택한 년, 월 저장
       });
     }
   }
@@ -147,26 +207,47 @@ class _FirstPageState extends State<FirstPage> {
           /// AppBar
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: Row(
-              children: [
-                IconButton(
-                  onPressed: () => _updateYearMonth(-1),
-                  icon: const Icon(Icons.arrow_back),
-                ),
-                GestureDetector(
-                  onTap: () =>
-                      _selectYearMonth(context), // 텍스트 클릭 시 DatePicker 열기
-                  child: Text(
-                    "${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월",
-                    style: const TextStyle(fontSize: 18),
+            title: _tabController.index == 2
+                ? Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => _updateYear(-1),
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      GestureDetector(
+                        onTap: () =>
+                            _selectYear(context), // 텍스트 클릭 시 DatePicker 열기
+                        child: Text(
+                          "${MainSelectYear.year}년",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => _updateYear(1),
+                        icon: const Icon(Icons.arrow_forward),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => _updateYearMonth(-1),
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      GestureDetector(
+                        onTap: () =>
+                            _selectYearMonth(context), // 텍스트 클릭 시 DatePicker 열기
+                        child: Text(
+                          "${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => _updateYearMonth(1),
+                        icon: const Icon(Icons.arrow_forward),
+                      ),
+                    ],
                   ),
-                ),
-                IconButton(
-                  onPressed: () => _updateYearMonth(1),
-                  icon: const Icon(Icons.arrow_forward),
-                ),
-              ],
-            ),
             actions: [
               IconButton(
                 onPressed: () {},
@@ -196,21 +277,22 @@ class _FirstPageState extends State<FirstPage> {
             ],
 
             /// TabBar
-            bottom: const TabBar(
+            bottom: TabBar(
+                controller: _tabController,
                 isScrollable: false,
                 indicatorColor: Colors.red,
                 indicatorWeight: 4,
                 labelColor: Colors.black,
                 indicatorSize: TabBarIndicatorSize.tab,
                 // 선택된 탭 스타일
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
                 // 선택되지 않은 탭 스타일
-                unselectedLabelStyle: TextStyle(
+                unselectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.normal,
                 ),
-                tabs: [
+                tabs: const [
                   Tab(
                     text: "일일",
                   ),
@@ -229,6 +311,7 @@ class _FirstPageState extends State<FirstPage> {
                 ]),
           ),
           body: TabBarView(
+            controller: _tabController,
             children: [
               /// 첫번째 탭
               Column(
@@ -278,14 +361,69 @@ class _FirstPageState extends State<FirstPage> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      color: Colors.grey.shade200,
-                      child: const Center(
-                        child: Text(
-                          "일일",
-                        ),
-                      ),
-                    ),
+                    child: transactions.isEmpty
+                        ? const Center(
+                            child: Text('데이터 없음'),
+                          )
+                        : ListView.builder(
+                            itemCount: transactions.length,
+                            itemBuilder: (context, index) {
+                              final trans = transactions[index];
+                              return Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  //borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          trans.date,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                          ),
+                                          child: const Text(
+                                            'test',
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            height: 1,
+                                            color: Colors.grey.shade300,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                   )
                 ],
               ),
