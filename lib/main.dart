@@ -1,5 +1,6 @@
 import 'package:account_book/Class/Transaction.dart';
 import 'package:account_book/accountbook_add.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -386,6 +387,7 @@ class _FirstPageState extends State<FirstPage>
                                           style: const TextStyle(
                                             fontSize: 16,
                                             color: Colors.black,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         const SizedBox(
@@ -400,8 +402,36 @@ class _FirstPageState extends State<FirstPage>
                                             borderRadius:
                                                 BorderRadius.circular(3),
                                           ),
-                                          child: const Text(
-                                            'test',
+                                          child: Text(
+                                            trans.dayOfWeek,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '${MainSelectDateTime.year}. ${MainSelectDateTime.month}',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text(
+                                          '${trans.income}원',
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${trans.expense}원',
+                                          style: const TextStyle(
+                                            color: Colors.red,
                                           ),
                                         )
                                       ],
@@ -419,6 +449,47 @@ class _FirstPageState extends State<FirstPage>
                                         )
                                       ],
                                     ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          CupertinoIcons.car,
+                                        ),
+                                        Text(
+                                          trans.category,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: '${trans.description}\n',
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    '${trans.time}  ${trans.bank}',
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${trans.income}원',
+                                          style: const TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 ),
                               );

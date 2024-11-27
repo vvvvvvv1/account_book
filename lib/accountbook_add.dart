@@ -9,6 +9,12 @@ class AccountbookAdd extends StatefulWidget {
 
 class _AccountbookAddState extends State<AccountbookAdd> {
   final TextEditingController _dateTimeController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController classController = TextEditingController();
+  TextEditingController assetController = TextEditingController();
+  TextEditingController detailController = TextEditingController();
+  TextEditingController memoController = TextEditingController();
+
   DateTime selectDateTime = DateTime.now(); // 사용자가 선택한 날짜와 시간을 저장
 
   final List<bool> _isSelected = [false, false, false];
@@ -289,18 +295,19 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               const SizedBox(
                 height: 5,
               ),
-              const Row(
+              Row(
                 children: [
-                  SizedBox(width: 17),
-                  Text(
+                  const SizedBox(width: 17),
+                  const Text(
                     '금액',
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: amountController,
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey),
                           ),
@@ -313,18 +320,19 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               const SizedBox(
                 height: 5,
               ),
-              const Row(
+              Row(
                 children: [
-                  SizedBox(width: 17),
-                  Text(
+                  const SizedBox(width: 17),
+                  const Text(
                     '분류',
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: classController,
+                        decoration: const InputDecoration(
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey))),
                       ),
@@ -335,18 +343,19 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               const SizedBox(
                 height: 5,
               ),
-              const Row(
+              Row(
                 children: [
-                  SizedBox(width: 17),
-                  Text(
+                  const SizedBox(width: 17),
+                  const Text(
                     '자산',
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: assetController,
+                        decoration: const InputDecoration(
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey))),
                       ),
@@ -357,18 +366,19 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               const SizedBox(
                 height: 5,
               ),
-              const Row(
+              Row(
                 children: [
-                  SizedBox(width: 17),
-                  Text(
+                  const SizedBox(width: 17),
+                  const Text(
                     '내용',
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: detailController,
+                        decoration: const InputDecoration(
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey))),
                       ),
@@ -397,13 +407,14 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               ),
 
               /// 메모
-              const Row(
+              Row(
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: memoController,
+                        decoration: const InputDecoration(
                           hintText: '메모',
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey),
@@ -429,7 +440,11 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                     child: SizedBox(
                       width: 300,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          String total =
+                              '${_dateTimeController.text} / ${amountController.text} / ${classController.text} / ${assetController.text} / ${detailController.text} / ${memoController.text}';
+                          print(total);
+                        },
                         style: ButtonStyle(
                           foregroundColor:
                               WidgetStateProperty.all(Colors.white),
