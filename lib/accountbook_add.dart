@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AccountbookAdd extends StatefulWidget {
@@ -151,100 +152,113 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  const SizedBox(width: 15),
                   // 파랑 파랑 파랑
-                  TextButton(
-                    onPressed: () => _selectButton(0),
-                    style: ButtonStyle(
-                      foregroundColor: _isSelected[0]
-                          ? WidgetStateProperty.all(Colors.blue.shade300)
-                          : WidgetStateProperty.all(Colors.grey.shade600),
-                      backgroundColor: _isSelected[0]
-                          ? WidgetStateProperty.all(Colors.white)
-                          : WidgetStateProperty.all(Colors.grey.shade200),
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            horizontal: 55, vertical: 16),
-                      ),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: _isSelected[0]
-                                ? Colors.blue.shade300
-                                : Colors.grey,
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => _selectButton(0),
+                      style: ButtonStyle(
+                        foregroundColor: _isSelected[0]
+                            ? WidgetStateProperty.all(Colors.blue.shade300)
+                            : WidgetStateProperty.all(Colors.grey.shade600),
+                        backgroundColor: _isSelected[0]
+                            ? WidgetStateProperty.all(Colors.white)
+                            : WidgetStateProperty.all(Colors.grey.shade200),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                              color: _isSelected[0]
+                                  ? Colors.blue.shade300
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      textStyle: WidgetStateProperty.all(
-                        const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: const Text("수입"),
                     ),
-                    child: const Text("수입"),
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   // 주황 주황 주황
-                  TextButton(
-                    onPressed: () => _selectButton(1),
-                    style: ButtonStyle(
-                      foregroundColor: _isSelected[1]
-                          ? WidgetStateProperty.all(Colors.orange.shade900)
-                          : WidgetStateProperty.all(Colors.grey.shade600),
-                      backgroundColor: _isSelected[1]
-                          ? WidgetStateProperty.all(Colors.white)
-                          : WidgetStateProperty.all(Colors.grey.shade200),
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            horizontal: 55, vertical: 16),
-                      ),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: _isSelected[1]
-                                ? Colors.orange.shade900
-                                : Colors.grey,
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => _selectButton(1),
+                      style: ButtonStyle(
+                        foregroundColor: _isSelected[1]
+                            ? WidgetStateProperty.all(Colors.orange.shade900)
+                            : WidgetStateProperty.all(Colors.grey.shade600),
+                        backgroundColor: _isSelected[1]
+                            ? WidgetStateProperty.all(Colors.white)
+                            : WidgetStateProperty.all(Colors.grey.shade200),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                              color: _isSelected[1]
+                                  ? Colors.orange.shade900
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      textStyle: WidgetStateProperty.all(
-                        const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: const Text("지출"),
                     ),
-                    child: const Text("지출"),
                   ),
+                  const SizedBox(width: 10),
                   // 검정 겅정 검정
-                  TextButton(
-                    onPressed: () => _selectButton(2),
-                    style: ButtonStyle(
-                      foregroundColor: _isSelected[2]
-                          ? WidgetStateProperty.all(Colors.black)
-                          : WidgetStateProperty.all(Colors.grey.shade600),
-                      backgroundColor: _isSelected[2]
-                          ? WidgetStateProperty.all(Colors.white)
-                          : WidgetStateProperty.all(Colors.grey.shade200),
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            horizontal: 55, vertical: 16),
-                      ),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: _isSelected[2] ? Colors.black : Colors.grey,
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => _selectButton(2),
+                      style: ButtonStyle(
+                        foregroundColor: _isSelected[2]
+                            ? WidgetStateProperty.all(Colors.black)
+                            : WidgetStateProperty.all(Colors.grey.shade600),
+                        backgroundColor: _isSelected[2]
+                            ? WidgetStateProperty.all(Colors.white)
+                            : WidgetStateProperty.all(Colors.grey.shade200),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                              color:
+                                  _isSelected[2] ? Colors.black : Colors.grey,
+                            ),
+                          ),
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      textStyle: WidgetStateProperty.all(
-                        const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: const Text("이체"),
                     ),
-                    child: const Text("이체"),
                   ),
+                  const SizedBox(width: 15),
                 ],
               ),
               const SizedBox(height: 20),
@@ -306,6 +320,8 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       child: TextField(
+                        // 숫자 자판 표시
+                        keyboardType: TextInputType.number,
                         controller: amountController,
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(
@@ -331,6 +347,86 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       child: TextField(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 5,
+                                    ),
+                                    color: Colors.black,
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          '분류',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            CupertinoIcons.pencil,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Icon(
+                                            CupertinoIcons.xmark,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 300,
+                                    child: GridView.count(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                      childAspectRatio: 1.5,
+                                      children: <Widget>[
+                                        _buildCategoryIcon(
+                                            "식비", Icons.fastfood),
+                                        _buildCategoryIcon(
+                                            "교통/차량", Icons.directions_car),
+                                        _buildCategoryIcon(
+                                            "문화생활", Icons.palette),
+                                        _buildCategoryIcon("마트/편의점",
+                                            Icons.local_grocery_store),
+                                        _buildCategoryIcon(
+                                            "패션/미용", Icons.shopping_bag),
+                                        _buildCategoryIcon("생활용품", Icons.home),
+                                        _buildCategoryIcon(
+                                            "주거/통신", Icons.phone_android),
+                                        _buildCategoryIcon(
+                                            "건강", Icons.health_and_safety),
+                                        _buildCategoryIcon("교육", Icons.school),
+                                        _buildCategoryIcon(
+                                            "경조사/회비", Icons.business),
+                                        _buildCategoryIcon("부모님", Icons.people),
+                                        _buildCategoryIcon(
+                                            "기타", Icons.more_horiz),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                         controller: classController,
                         decoration: const InputDecoration(
                             border: UnderlineInputBorder(
@@ -435,10 +531,10 @@ class _AccountbookAddState extends State<AccountbookAdd> {
               // 저장
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SizedBox(
-                      width: 300,
+                  const SizedBox(width: 15),
+                  SizedBox(
+                    width: 240,
+                    child: Expanded(
                       child: ElevatedButton(
                         onPressed: () {
                           String total =
@@ -462,32 +558,28 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: SizedBox(
-                      width: 100,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor:
-                              WidgetStateProperty.all(Colors.black),
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.white),
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: const BorderSide(
-                                color: Colors.black45,
-                              ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        foregroundColor: WidgetStateProperty.all(Colors.black),
+                        backgroundColor: WidgetStateProperty.all(Colors.white),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: const BorderSide(
+                              color: Colors.black45,
                             ),
                           ),
                         ),
-                        child: const Text(
-                          '계속',
-                        ),
+                      ),
+                      child: const Text(
+                        '계속',
                       ),
                     ),
                   ),
+                  const SizedBox(width: 20),
                 ],
               ),
             ],
@@ -496,4 +588,22 @@ class _AccountbookAddState extends State<AccountbookAdd> {
       ),
     );
   }
+}
+
+Widget _buildCategoryIcon(String label, IconData iconData) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Icon(
+        iconData,
+        size: 40,
+        color: Colors.blue,
+      ),
+      const SizedBox(height: 5),
+      Text(
+        label,
+        style: const TextStyle(fontSize: 12, color: Colors.black),
+      ),
+    ],
+  );
 }

@@ -193,22 +193,19 @@ class _FirstPageState extends State<FirstPage>
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: const Locale('ko', 'KR'), // 한국어 로케일 설정
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate, // 한국어 등 로케일을 지원
         GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ko', 'KR'), // 한국어 지원
-        Locale('en', 'US'), // 영어 지원 (옵션)
       ],
       home: DefaultTabController(
         length: 5,
         child: Scaffold(
           /// AppBar
           appBar: AppBar(
+            automaticallyImplyLeading: true,
             backgroundColor: Colors.white,
-            title: _tabController.index == 2
+            leadingWidth: 185,
+            leading: _tabController.index == 2
                 ? Row(
                     children: [
                       IconButton(
@@ -220,7 +217,7 @@ class _FirstPageState extends State<FirstPage>
                             _selectYear(context), // 텍스트 클릭 시 DatePicker 열기
                         child: Text(
                           "${MainSelectYear.year}년",
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ),
                       IconButton(
@@ -232,18 +229,23 @@ class _FirstPageState extends State<FirstPage>
                 : Row(
                     children: [
                       IconButton(
+                        iconSize: 18,
                         onPressed: () => _updateYearMonth(-1),
                         icon: const Icon(Icons.arrow_back),
                       ),
-                      GestureDetector(
-                        onTap: () =>
-                            _selectYearMonth(context), // 텍스트 클릭 시 DatePicker 열기
-                        child: Text(
-                          "${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월",
-                          style: const TextStyle(fontSize: 18),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => _selectYearMonth(
+                              context), // 텍스트 클릭 시 DatePicker 열기
+                          child: Text(
+                            "${MainSelectDateTime.year}년 ${MainSelectDateTime.month}월",
+                            style: const TextStyle(fontSize: 15),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       IconButton(
+                        iconSize: 18,
                         onPressed: () => _updateYearMonth(1),
                         icon: const Icon(Icons.arrow_forward),
                       ),
@@ -872,39 +874,43 @@ class _FirstPageState extends State<FirstPage>
                             height: 20,
                           ),
                           Row(
-                            children: <Widget>[
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12),
-                              ),
-                              SizedBox(
-                                width: 450,
-                                height: 40,
-                                child: TextButton(
+                            children: [
+                              // Padding 대신 SizedBox로 여백을 추가
+                              const SizedBox(width: 22),
+                              Expanded(
+                                // 버튼이 Row의 여유 공간에 맞춰 크기를 자동으로 조정
+                                child: SizedBox(
+                                  height: 40,
+                                  child: TextButton(
                                     style: ButtonStyle(
                                       shape: WidgetStateProperty.all(
                                         RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
                                           side: const BorderSide(
-                                            color: Colors.grey,
+                                            color: Colors.grey, // 버튼 테두리 색상
                                           ),
                                         ),
+                                      ),
+                                      backgroundColor: WidgetStateProperty.all(
+                                          Colors.white), // 배경색 설정
+                                      padding: WidgetStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 16),
                                       ),
                                     ),
                                     onPressed: () {
                                       print('Click');
                                     },
                                     child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center, // 텍스트와 아이콘 가운데 정렬
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.fileExcel,
                                           color: Colors.lightGreen,
                                         ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
+                                        SizedBox(width: 8), // 아이콘과 텍스트 사이 간격
                                         Text(
                                           '메일로 엑셀파일 내보내기',
                                           style: TextStyle(
@@ -913,10 +919,13 @@ class _FirstPageState extends State<FirstPage>
                                           ),
                                         ),
                                       ],
-                                    )),
+                                    ),
+                                  ),
+                                ),
                               ),
+                              const SizedBox(width: 22), // 오른쪽 여백
                             ],
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -950,6 +959,7 @@ class _FirstPageState extends State<FirstPage>
                 width: 10,
               ),
               FloatingActionButton(
+                heroTag: 'chat',
                 backgroundColor: Colors.red.shade400,
                 onPressed: () {
                   Navigator.push(
