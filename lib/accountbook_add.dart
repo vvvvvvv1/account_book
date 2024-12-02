@@ -1,5 +1,7 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AccountbookAdd extends StatefulWidget {
   const AccountbookAdd({super.key});
@@ -320,6 +322,13 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       child: TextField(
+                        inputFormatters: <TextInputFormatter>[
+                          CurrencyTextInputFormatter.currency(
+                            locale: 'ko',
+                            decimalDigits: 0,
+                            symbol: '',
+                          ),
+                        ],
                         // 숫자 자판 표시
                         keyboardType: TextInputType.number,
                         controller: amountController,
@@ -399,26 +408,31 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                                       childAspectRatio: 1.5,
                                       children: <Widget>[
                                         _buildCategoryIcon(
-                                            "식비", Icons.fastfood),
+                                            "식비", Icons.fastfood, '식비 클릭'),
+                                        _buildCategoryIcon("교통/차량",
+                                            Icons.directions_car, '교통/차량 클릭'),
                                         _buildCategoryIcon(
-                                            "교통/차량", Icons.directions_car),
+                                            "문화생활", Icons.palette, "문화생활"),
                                         _buildCategoryIcon(
-                                            "문화생활", Icons.palette),
-                                        _buildCategoryIcon("마트/편의점",
-                                            Icons.local_grocery_store),
+                                            "마트/편의점",
+                                            Icons.local_grocery_store,
+                                            "마트/편의점"),
+                                        _buildCategoryIcon("패션/미용",
+                                            Icons.shopping_bag, "패션/미용"),
                                         _buildCategoryIcon(
-                                            "패션/미용", Icons.shopping_bag),
-                                        _buildCategoryIcon("생활용품", Icons.home),
+                                            "생활용품", Icons.home, "생활용품"),
+                                        _buildCategoryIcon("주거/통신",
+                                            Icons.phone_android, "주거/통신"),
+                                        _buildCategoryIcon("건강",
+                                            Icons.health_and_safety, "건강"),
                                         _buildCategoryIcon(
-                                            "주거/통신", Icons.phone_android),
+                                            "교육", Icons.school, "교육"),
                                         _buildCategoryIcon(
-                                            "건강", Icons.health_and_safety),
-                                        _buildCategoryIcon("교육", Icons.school),
+                                            "경조사/회비", Icons.business, "경조사/회비"),
                                         _buildCategoryIcon(
-                                            "경조사/회비", Icons.business),
-                                        _buildCategoryIcon("부모님", Icons.people),
+                                            "부모님", Icons.people, "부모님"),
                                         _buildCategoryIcon(
-                                            "기타", Icons.more_horiz),
+                                            "기타", Icons.more_horiz, "기타"),
                                       ],
                                     ),
                                   ),
@@ -590,13 +604,16 @@ class _AccountbookAddState extends State<AccountbookAdd> {
   }
 }
 
-Widget _buildCategoryIcon(String label, IconData iconData) {
-  return Column(
+Widget _buildCategoryIcon(String label, IconData iconData, String click) {
+  return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(
-        iconData,
-        size: 40,
+      IconButton(
+        onPressed: () {
+          click;
+        },
+        icon: Icon(iconData),
+        iconSize: 20,
         color: Colors.blue,
       ),
       const SizedBox(height: 5),
