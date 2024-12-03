@@ -145,458 +145,500 @@ class _AccountbookAddState extends State<AccountbookAdd> {
             ),
           ],
         ),
-        body: Container(
-          color: Colors.white,
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SizedBox(width: 15),
-                  // 파랑 파랑 파랑
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () => _selectButton(0),
-                      style: ButtonStyle(
-                        foregroundColor: _isSelected[0]
-                            ? WidgetStateProperty.all(Colors.blue.shade300)
-                            : WidgetStateProperty.all(Colors.grey.shade600),
-                        backgroundColor: _isSelected[0]
-                            ? WidgetStateProperty.all(Colors.white)
-                            : WidgetStateProperty.all(Colors.grey.shade200),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                        ),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(
-                              color: _isSelected[0]
-                                  ? Colors.blue.shade300
-                                  : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        textStyle: WidgetStateProperty.all(
-                          const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      child: const Text("수입"),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  // 주황 주황 주황
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () => _selectButton(1),
-                      style: ButtonStyle(
-                        foregroundColor: _isSelected[1]
-                            ? WidgetStateProperty.all(Colors.orange.shade900)
-                            : WidgetStateProperty.all(Colors.grey.shade600),
-                        backgroundColor: _isSelected[1]
-                            ? WidgetStateProperty.all(Colors.white)
-                            : WidgetStateProperty.all(Colors.grey.shade200),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                        ),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(
-                              color: _isSelected[1]
-                                  ? Colors.orange.shade900
-                                  : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        textStyle: WidgetStateProperty.all(
-                          const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      child: const Text("지출"),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  // 검정 겅정 검정
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () => _selectButton(2),
-                      style: ButtonStyle(
-                        foregroundColor: _isSelected[2]
-                            ? WidgetStateProperty.all(Colors.black)
-                            : WidgetStateProperty.all(Colors.grey.shade600),
-                        backgroundColor: _isSelected[2]
-                            ? WidgetStateProperty.all(Colors.white)
-                            : WidgetStateProperty.all(Colors.grey.shade200),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                        ),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(
-                              color:
-                                  _isSelected[2] ? Colors.black : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        textStyle: WidgetStateProperty.all(
-                          const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      child: const Text("이체"),
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Container(
-                child: Row(
+        body: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const SizedBox(width: 18),
-                    const Text('날짜'),
+                    const SizedBox(width: 15),
+                    // 파랑 파랑 파랑
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => _selectButton(0),
+                        style: ButtonStyle(
+                          foregroundColor: _isSelected[0]
+                              ? WidgetStateProperty.all(Colors.blue.shade300)
+                              : WidgetStateProperty.all(Colors.grey.shade600),
+                          backgroundColor: _isSelected[0]
+                              ? WidgetStateProperty.all(Colors.white)
+                              : WidgetStateProperty.all(Colors.grey.shade200),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                          ),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(
+                                color: _isSelected[0]
+                                    ? Colors.blue.shade300
+                                    : Colors.grey,
+                              ),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        child: const Text("수입"),
+                      ),
+                    ),
                     const SizedBox(
-                      width: 5,
+                      width: 10,
+                    ),
+                    // 주황 주황 주황
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => _selectButton(1),
+                        style: ButtonStyle(
+                          foregroundColor: _isSelected[1]
+                              ? WidgetStateProperty.all(Colors.orange.shade900)
+                              : WidgetStateProperty.all(Colors.grey.shade600),
+                          backgroundColor: _isSelected[1]
+                              ? WidgetStateProperty.all(Colors.white)
+                              : WidgetStateProperty.all(Colors.grey.shade200),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                          ),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(
+                                color: _isSelected[1]
+                                    ? Colors.orange.shade900
+                                    : Colors.grey,
+                              ),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        child: const Text("지출"),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    // 검정 겅정 검정
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => _selectButton(2),
+                        style: ButtonStyle(
+                          foregroundColor: _isSelected[2]
+                              ? WidgetStateProperty.all(Colors.black)
+                              : WidgetStateProperty.all(Colors.grey.shade600),
+                          backgroundColor: _isSelected[2]
+                              ? WidgetStateProperty.all(Colors.white)
+                              : WidgetStateProperty.all(Colors.grey.shade200),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                          ),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(
+                                color:
+                                    _isSelected[2] ? Colors.black : Colors.grey,
+                              ),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        child: const Text("이체"),
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 18),
+                      const Text('날짜'),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 17),
+                          child: TextField(
+                            controller: _dateTimeController,
+
+                            /// 읽기 전용 (사용자 직접 입력 불가)
+                            readOnly: true,
+
+                            /// 날짜 및 시간 선택기 실행
+                            onTap: () => _selectDateTime(context),
+                            decoration: const InputDecoration(
+                              // hintText: '날짜와 시간을 선택하세요',
+
+                              // TextField가 선택되지 않았을 때 나타나는 밑줄 스타일
+                              // UnderlineInputBorder로 설정하여 밑줄만 표시
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey), // 기본 밑줄 색상
+                              ),
+
+                              /// TextField가 선택되었을 때 나타나는 밑줄 스타일
+                              /// UnderlineInputBorder를 사용해 밑줄을 표시
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.blue), // 포커스 시 밑줄 색상
+                              ),
+                              //suffixIcon: Icon(Icons.calendar_today),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 17),
+                    const Text(
+                      '금액',
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 17),
+                            vertical: 0, horizontal: 20),
                         child: TextField(
-                          controller: _dateTimeController,
-
-                          /// 읽기 전용 (사용자 직접 입력 불가)
-                          readOnly: true,
-
-                          /// 날짜 및 시간 선택기 실행
-                          onTap: () => _selectDateTime(context),
+                          inputFormatters: <TextInputFormatter>[
+                            CurrencyTextInputFormatter.currency(
+                              locale: 'ko',
+                              decimalDigits: 0,
+                              symbol: '',
+                            ),
+                          ],
+                          // 숫자 자판 표시
+                          keyboardType: TextInputType.number,
+                          controller: amountController,
                           decoration: const InputDecoration(
-                            // hintText: '날짜와 시간을 선택하세요',
-
-                            // TextField가 선택되지 않았을 때 나타나는 밑줄 스타일
-                            // UnderlineInputBorder로 설정하여 밑줄만 표시
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey), // 기본 밑줄 색상
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
                             ),
-
-                            /// TextField가 선택되었을 때 나타나는 밑줄 스타일
-                            /// UnderlineInputBorder를 사용해 밑줄을 표시
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.blue), // 포커스 시 밑줄 색상
-                            ),
-                            //suffixIcon: Icon(Icons.calendar_today),
                           ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 17),
+                    const Text(
+                      '분류',
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        child: TextField(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 5,
+                                      ),
+                                      color: Colors.black,
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            '분류',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              CupertinoIcons.pencil,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            icon: const Icon(
+                                              CupertinoIcons.xmark,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 300,
+                                      child: GridView.count(
+                                        crossAxisCount: 4,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        childAspectRatio: 1.5,
+                                        children: <Widget>[
+                                          _buildCategoryIcon(
+                                              "식비",
+                                              Icons.fastfood,
+                                              '식비 클릭',
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "교통/차량",
+                                              Icons.directions_car,
+                                              '교통/차량 클릭',
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "문화생활",
+                                              Icons.palette,
+                                              "문화생활",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "마트/편의점",
+                                              Icons.local_grocery_store,
+                                              "마트/편의점",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "패션/미용",
+                                              Icons.shopping_bag,
+                                              "패션/미용",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon("생활용품", Icons.home,
+                                              "생활용품", classController, context),
+                                          _buildCategoryIcon(
+                                              "주거/통신",
+                                              Icons.phone_android,
+                                              "주거/통신",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "건강",
+                                              Icons.health_and_safety,
+                                              "건강",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon("교육", Icons.school,
+                                              "교육", classController, context),
+                                          _buildCategoryIcon(
+                                              "경조사/회비",
+                                              Icons.business,
+                                              "경조사/회비",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "부모님",
+                                              Icons.people,
+                                              "부모님",
+                                              classController,
+                                              context),
+                                          _buildCategoryIcon(
+                                              "기타",
+                                              Icons.more_horiz,
+                                              "기타",
+                                              classController,
+                                              context),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          controller: classController,
+                          decoration: const InputDecoration(
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 17),
+                    const Text(
+                      '자산',
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        child: TextField(
+                          controller: assetController,
+                          decoration: const InputDecoration(
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 17),
+                    const Text(
+                      '내용',
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        child: TextField(
+                          controller: detailController,
+                          decoration: const InputDecoration(
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 17),
-                  const Text(
-                    '금액',
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 20),
-                      child: TextField(
-                        inputFormatters: <TextInputFormatter>[
-                          CurrencyTextInputFormatter.currency(
-                            locale: 'ko',
-                            decimalDigits: 0,
-                            symbol: '',
+                const SizedBox(
+                  height: 30,
+                ),
+
+                /// 빈 바
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        color: Colors.grey.shade200,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                /// 메모
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          controller: memoController,
+                          decoration: const InputDecoration(
+                            hintText: '메모',
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            suffixIcon: Icon(
+                              Icons.camera_alt_outlined,
+                            ),
                           ),
-                        ],
-                        // 숫자 자판 표시
-                        keyboardType: TextInputType.number,
-                        controller: amountController,
-                        decoration: const InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+
+                // 저장
+                Row(
+                  children: [
+                    const SizedBox(width: 15),
+                    SizedBox(
+                      width: 240,
+                      child: Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            String total =
+                                '${_dateTimeController.text} / ${amountController.text} / ${classController.text} / ${assetController.text} / ${detailController.text} / ${memoController.text}';
+                            print(total);
+                          },
+                          style: ButtonStyle(
+                            foregroundColor:
+                                WidgetStateProperty.all(Colors.white),
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.orange.shade900),
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                          child: const Text(
+                            '저장하기',
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 17),
-                  const Text(
-                    '분류',
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 20),
-                      child: TextField(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 15,
-                                      vertical: 5,
-                                    ),
-                                    color: Colors.black,
-                                    child: Row(
-                                      children: [
-                                        const Text(
-                                          '분류',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                            CupertinoIcons.pencil,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          icon: const Icon(
-                                            CupertinoIcons.xmark,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 300,
-                                    child: GridView.count(
-                                      crossAxisCount: 4,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10,
-                                      childAspectRatio: 1.5,
-                                      children: <Widget>[
-                                        _buildCategoryIcon(
-                                            "식비", Icons.fastfood, '식비 클릭'),
-                                        _buildCategoryIcon("교통/차량",
-                                            Icons.directions_car, '교통/차량 클릭'),
-                                        _buildCategoryIcon(
-                                            "문화생활", Icons.palette, "문화생활"),
-                                        _buildCategoryIcon(
-                                            "마트/편의점",
-                                            Icons.local_grocery_store,
-                                            "마트/편의점"),
-                                        _buildCategoryIcon("패션/미용",
-                                            Icons.shopping_bag, "패션/미용"),
-                                        _buildCategoryIcon(
-                                            "생활용품", Icons.home, "생활용품"),
-                                        _buildCategoryIcon("주거/통신",
-                                            Icons.phone_android, "주거/통신"),
-                                        _buildCategoryIcon("건강",
-                                            Icons.health_and_safety, "건강"),
-                                        _buildCategoryIcon(
-                                            "교육", Icons.school, "교육"),
-                                        _buildCategoryIcon(
-                                            "경조사/회비", Icons.business, "경조사/회비"),
-                                        _buildCategoryIcon(
-                                            "부모님", Icons.people, "부모님"),
-                                        _buildCategoryIcon(
-                                            "기타", Icons.more_horiz, "기타"),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        controller: classController,
-                        decoration: const InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey))),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 17),
-                  const Text(
-                    '자산',
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 20),
-                      child: TextField(
-                        controller: assetController,
-                        decoration: const InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey))),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 17),
-                  const Text(
-                    '내용',
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 20),
-                      child: TextField(
-                        controller: detailController,
-                        decoration: const InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey))),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-
-              /// 빈 바
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      color: Colors.grey.shade200,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              /// 메모
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
-                        controller: memoController,
-                        decoration: const InputDecoration(
-                          hintText: '메모',
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          suffixIcon: Icon(
-                            Icons.camera_alt_outlined,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-
-              // 저장
-              Row(
-                children: [
-                  const SizedBox(width: 15),
-                  SizedBox(
-                    width: 240,
-                    child: Expanded(
+                    const SizedBox(width: 10),
+                    Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          String total =
-                              '${_dateTimeController.text} / ${amountController.text} / ${classController.text} / ${assetController.text} / ${detailController.text} / ${memoController.text}';
-                          print(total);
-                        },
+                        onPressed: () {},
                         style: ButtonStyle(
                           foregroundColor:
-                              WidgetStateProperty.all(Colors.white),
+                              WidgetStateProperty.all(Colors.black),
                           backgroundColor:
-                              WidgetStateProperty.all(Colors.orange.shade900),
+                              WidgetStateProperty.all(Colors.white),
                           shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(
+                                color: Colors.black45,
+                              ),
                             ),
                           ),
                         ),
                         child: const Text(
-                          '저장하기',
+                          '계속',
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        foregroundColor: WidgetStateProperty.all(Colors.black),
-                        backgroundColor: WidgetStateProperty.all(Colors.white),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: const BorderSide(
-                              color: Colors.black45,
-                            ),
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        '계속',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 20),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -604,23 +646,35 @@ class _AccountbookAddState extends State<AccountbookAdd> {
   }
 }
 
-Widget _buildCategoryIcon(String label, IconData iconData, String click) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      IconButton(
-        onPressed: () {
-          click;
-        },
-        icon: Icon(iconData),
-        iconSize: 20,
-        color: Colors.blue,
+Widget _buildCategoryIcon(String label, IconData iconData, String Click,
+    TextEditingController controller, BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      controller.text = label;
+      print(Click);
+      Navigator.of(context).pop();
+    },
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+        ),
       ),
-      const SizedBox(height: 5),
-      Text(
-        label,
-        style: const TextStyle(fontSize: 12, color: Colors.black),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            iconData,
+            size: 20,
+            color: Colors.blue,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 12, color: Colors.black),
+          ),
+        ],
       ),
-    ],
+    ),
   );
 }

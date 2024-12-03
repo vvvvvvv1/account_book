@@ -1,5 +1,6 @@
 import 'package:account_book/Class/Transaction.dart';
 import 'package:account_book/accountbook_add.dart';
+import 'package:account_book/widget/TotalMoney.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -172,7 +173,7 @@ class _FirstPageState extends State<FirstPage>
     }
   }
 
-  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장 (년월 선택)
+  /// showDatePicker를 사용하여 년월 선택 및 선택 날짜 변수에 저장 (년도 선택)
   Future<void> _selectYear(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -205,9 +206,12 @@ class _FirstPageState extends State<FirstPage>
             automaticallyImplyLeading: true,
             backgroundColor: Colors.white,
             leadingWidth: 185,
+
+            /// tab index가 2이면 년도만 표출 / 아니면 년월 표출
             leading: _tabController.index == 2
                 ? Row(
                     children: [
+                      /// <-
                       IconButton(
                         onPressed: () => _updateYear(-1),
                         icon: const Icon(Icons.arrow_back),
@@ -220,6 +224,8 @@ class _FirstPageState extends State<FirstPage>
                           style: const TextStyle(fontSize: 15),
                         ),
                       ),
+
+                      /// ->
                       IconButton(
                         onPressed: () => _updateYear(1),
                         icon: const Icon(Icons.arrow_forward),
@@ -228,6 +234,7 @@ class _FirstPageState extends State<FirstPage>
                   )
                 : Row(
                     children: [
+                      /// <-
                       IconButton(
                         iconSize: 18,
                         onPressed: () => _updateYearMonth(-1),
@@ -244,6 +251,8 @@ class _FirstPageState extends State<FirstPage>
                           ),
                         ),
                       ),
+
+                      /// ->
                       IconButton(
                         iconSize: 18,
                         onPressed: () => _updateYearMonth(1),
@@ -281,11 +290,17 @@ class _FirstPageState extends State<FirstPage>
 
             /// TabBar
             bottom: TabBar(
+                // 컨트롤러 설정
                 controller: _tabController,
+                // 스크롤 가능 여부
                 isScrollable: false,
+                // 탭 아래 표시되는 선 색상 설정
                 indicatorColor: Colors.red,
+                // 탭 아래 표시되는 선 두께 설정
                 indicatorWeight: 4,
+                // 탭 텍스트 색상
                 labelColor: Colors.black,
+                // 탭 아래 표시되는 선 크기 설정
                 indicatorSize: TabBarIndicatorSize.tab,
                 // 선택된 탭 스타일
                 labelStyle: const TextStyle(
@@ -295,6 +310,7 @@ class _FirstPageState extends State<FirstPage>
                 unselectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.normal,
                 ),
+                // 탭 바에 표시될 탭 콘텐츠 정의
                 tabs: const [
                   Tab(
                     text: "일일",
@@ -319,58 +335,21 @@ class _FirstPageState extends State<FirstPage>
               /// 첫번째 탭
               Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("수입"),
-                            Text("지출"),
-                            Text("합계"),
-                          ],
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
-                            Text("0"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                color: Colors.grey.shade300,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  // 수입, 지출, 합계
+                  const TotalMoney(),
                   Expanded(
+                    // List에 데이터 없으면 데이터 없음 텍스트 표출 / 있으면 데이터 표출
                     child: transactions.isEmpty
                         ? const Center(
                             child: Text('데이터 없음'),
                           )
                         : ListView.builder(
+                            // 보여주려는 데이터 개수
                             itemCount: transactions.length,
+                            // itemCount 만큼 반복되며 화면에 보여주려는 위젯
+                            // index가 0부터 transactions.length - 1까지 증가하며 전달됩니다.
                             itemBuilder: (context, index) {
+                              // transactions index에 해당하는 data 꺼내기
                               final trans = transactions[index];
                               return Container(
                                 padding: const EdgeInsets.all(10),
@@ -504,50 +483,7 @@ class _FirstPageState extends State<FirstPage>
               /// 두번째 탭
               Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("수입"),
-                            Text("지출"),
-                            Text("합계"),
-                          ],
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
-                            Text("0"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                color: Colors.grey.shade300,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  const TotalMoney(),
                   Expanded(
                     child: Container(
                       color: Colors.white,
@@ -585,50 +521,7 @@ class _FirstPageState extends State<FirstPage>
               /// 세번째 탭
               Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("수입"),
-                            Text("지출"),
-                            Text("합계"),
-                          ],
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
-                            Text("0"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                color: Colors.grey.shade300,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  const TotalMoney(),
                   Expanded(
                     child: Container(
                       color: Colors.white,
@@ -656,50 +549,7 @@ class _FirstPageState extends State<FirstPage>
               /// 네번째 탭
               Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("수입"),
-                            Text("지출"),
-                            Text("합계"),
-                          ],
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
-                            Text("0"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                color: Colors.grey.shade300,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  const TotalMoney(),
                   Expanded(
                     child: Container(
                       color: Colors.white,
