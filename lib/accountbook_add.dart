@@ -1,7 +1,9 @@
+import 'package:account_book/TransactionService.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AccountbookAdd extends StatefulWidget {
   const AccountbookAdd({super.key});
@@ -406,7 +408,7 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10,
-                                        childAspectRatio: 1.5,
+                                        childAspectRatio: 2,
                                         children: <Widget>[
                                           _buildCategoryIcon(
                                               "식비",
@@ -482,8 +484,10 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                           },
                           controller: classController,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -503,10 +507,87 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 20),
                         child: TextField(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 5,
+                                      ),
+                                      color: Colors.black,
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            '자산',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              CupertinoIcons.pencil,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            icon: const Icon(
+                                              CupertinoIcons.xmark,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 300,
+                                      child: GridView.count(
+                                        crossAxisCount: 4,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        childAspectRatio: 2,
+                                        children: <Widget>[
+                                          _buildMoney("현금", '식비 클릭',
+                                              assetController, context),
+                                          _buildMoney("신한은행", '신한은행 클릭',
+                                              assetController, context),
+                                          _buildMoney("KB국민은행", 'KB국민은행 클릭',
+                                              assetController, context),
+                                          _buildMoney("기업은행", '기업은행 클릭',
+                                              assetController, context),
+                                          _buildMoney("카카오뱅크", '카카오뱅크 클릭',
+                                              assetController, context),
+                                          _buildMoney("농협", '농협 클릭',
+                                              assetController, context),
+                                          _buildMoney("신한금융", '신한금융 클릭',
+                                              assetController, context),
+                                          _buildMoney("케이뱅크", '케이뱅크 클릭',
+                                              assetController, context),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           controller: assetController,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -590,9 +671,28 @@ class _AccountbookAddState extends State<AccountbookAdd> {
                       child: Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            String total =
-                                '${_dateTimeController.text} / ${amountController.text} / ${classController.text} / ${assetController.text} / ${detailController.text} / ${memoController.text}';
-                            print(total);
+                            String Date = _dateTimeController.text;
+                            String Amount = amountController.text;
+                            String Class = classController.text;
+                            String Asset = assetController.text;
+                            String Detail = detailController.text;
+                            String Memo = memoController.text;
+
+
+                            Transactionservice transactionservice =
+                                context.read<Transactionservice>();
+                            transactionservice.CreateTransaction(
+                                _dateTimeController.text.substring(8, 10),
+                                "dayOfWeek",
+                                Class,
+                                Asset,
+                                "time",
+                                "bank",
+                                0,
+                                0);
+                            // String total =
+                            //     '${_dateTimeController.text} / ${amountController.text} / ${classController.text} / ${assetController.text} / ${detailController.text} / ${memoController.text}';
+                            //print(test);
                           },
                           style: ButtonStyle(
                             foregroundColor:
@@ -674,6 +774,30 @@ Widget _buildCategoryIcon(String label, IconData iconData, String Click,
             style: const TextStyle(fontSize: 12, color: Colors.black),
           ),
         ],
+      ),
+    ),
+  );
+}
+
+Widget _buildMoney(String label, String Click, TextEditingController controller,
+    BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      controller.text = label;
+      print(Click);
+      Navigator.of(context).pop();
+    },
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 12, color: Colors.black),
+        ),
       ),
     ),
   );
